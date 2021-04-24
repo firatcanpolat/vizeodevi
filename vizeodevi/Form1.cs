@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 namespace vizeodevi
 {
     public partial class Form1 : Form
     {
-        string duyuru = "https://www.btk.gov.tr/rss/announcements";
+        string dosya = "http://www.trt.net.tr/rss/turkiye.rss";
 
         public Form1()
         {
@@ -21,10 +22,39 @@ namespace vizeodevi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            XmlDocument bilgi = new XmlDocument();
-            bilgi.Load(duyuru);
-            XmlElement root = bilgi.DocumentElement;
-            XmlNodeList nodes = root.SelectNodes("link");
+            XmlDocument trt = new XmlDocument();
+            trt.Load(dosya);
+            XmlElement root = trt.DocumentElement;
+            XmlNodeList nodes = root.SelectNodes("channel");
+
+
+            foreach (XmlNode node in nodes)
+            {
+                string baslik = node["title"].InnerText;
+                string haber = node["description"].InnerText;
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = baslik;
+                row.Cells[1].Value = haber;
+                dataGridView1.Rows.Add(row);
+
+
+
+
+
+
+
+            }
         }
+
+        
+             
+        
     }
+
 }
+        
+
+        
+
+
+    
