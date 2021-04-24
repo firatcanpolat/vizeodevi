@@ -32,11 +32,13 @@ namespace vizeodevi
             {
                 string baslik = node["title"].InnerText;
                 string haber = node["description"].InnerText;
+                string tarih = node["lastBuildDate"].InnerText;
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
                 row.Cells[0].Value = baslik;
                 row.Cells[1].Value = haber;
+                row.Cells[2].Value = tarih;
                 dataGridView1.Rows.Add(row);
-
+                
 
 
 
@@ -44,11 +46,19 @@ namespace vizeodevi
 
 
             }
+            
+
+
+
+
+
+
         }
 
-        
-             
-        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("GÜNCELLENİYOR", "UYARI");
+        }
     }
 
 }
