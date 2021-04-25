@@ -25,18 +25,18 @@ namespace vizeodevi
             XmlDocument trt = new XmlDocument();
             trt.Load(dosya);
             XmlElement root = trt.DocumentElement;
-            XmlNodeList nodes = root.SelectNodes("channel");
+            XmlNodeList nodes = root.SelectNodes("channel/item");
 
 
             foreach (XmlNode node in nodes)
             {
                 string baslik = node["title"].InnerText;
                 string haber = node["description"].InnerText;
-                string tarih = node["lastBuildDate"].InnerText;
+                string link = node["link"].InnerText;
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
                 row.Cells[0].Value = baslik;
                 row.Cells[1].Value = haber;
-                row.Cells[2].Value = tarih;
+                row.Cells[2].Value = link;
                 dataGridView1.Rows.Add(row);
                 
 
